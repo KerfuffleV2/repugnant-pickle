@@ -286,11 +286,11 @@ pub fn evaluate<'a>(
                 stack.push(Value::Seq(SequenceType::Tuple, vec![t1]));
             }
             PickleOp::TUPLE2 => {
-                let (t1, t2) = (stack.pop()?, stack.pop()?);
+                let (t2, t1) = (stack.pop()?, stack.pop()?);
                 stack.push(Value::Seq(SequenceType::Tuple, vec![t1, t2]));
             }
             PickleOp::TUPLE3 => {
-                let (t1, t2, t3) = (stack.pop()?, stack.pop()?, stack.pop()?);
+                let (t3, t2, t1) = (stack.pop()?, stack.pop()?, stack.pop()?);
                 stack.push(Value::Seq(SequenceType::Tuple, vec![t1, t2, t3]));
             }
             PickleOp::APPEND => {

@@ -62,6 +62,26 @@ pub enum TensorType {
     Unknown(String),
 }
 
+impl TensorType {
+    /// Get the item size for this tensor type. However,
+    /// the type of Unknown tensor types is... well,
+    /// unknown. So you get 0 back there.
+    pub fn size(&self) -> usize {
+        match self {
+            TensorType::Float64 => 8,
+            TensorType::Float32 => 4,
+            TensorType::Float16 => 2,
+            TensorType::BFloat16 => 2,
+            TensorType::Int64 => 8,
+            TensorType::Int32 => 4,
+            TensorType::Int16 => 2,
+            TensorType::Int8 => 1,
+            TensorType::UInt8 => 1,
+            TensorType::Unknown(_) => 0,
+        }
+    }
+}
+
 impl FromStr for TensorType {
     type Err = std::convert::Infallible;
 
@@ -122,6 +142,16 @@ pub struct RepugnantTorchTensor {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct RepugnantTorchTensors(pub Vec<RepugnantTorchTensor>);
+
+impl IntoIterator for RepugnantTorchTensors {
+    type Item = RepugnantTorchTensor;
+
+    type IntoIter = std::vec::IntoIter<RepugnantTorchTensor>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
+    }
+}
 
 impl RepugnantTorchTensors {
     pub fn new_from_file<P: AsRef<Path>>(filename: P) -> Result<Self> {
@@ -239,6 +269,7 @@ impl RepugnantTorchTensors {
                 zf.compression() == zip::CompressionMethod::STORE,
                 "Can't handle compressed files",
             );
+            let offs = offs * stype.size() as u64;
             tensors.push(RepugnantTorchTensor {
                 name: k.to_string(),
                 device: sdev.to_string(),

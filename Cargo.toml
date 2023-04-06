@@ -2,7 +2,7 @@
 name = "repugnant-pickle"
 version = "0.0.1"
 edition = "2021"
-resolve = "2"
+resolver = "2"
 
 [features]
 default = []

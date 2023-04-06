@@ -55,8 +55,8 @@ PyTorch file:
                 Int(430348288),
               ])),
               Int(327378944),
-              Seq(Tuple, [Int(1024), Int(50277)]),
-              Seq(Tuple, [Int(1), Int(1024)]),
+              Seq(Tuple, [Int(50277), Int(1024)]),
+              Seq(Tuple, [Int(1024), Int(1)]),
               Bool(false),
               Global(Raw(GLOBAL("collections", "OrderedDict")), [
                 Seq(Tuple, [])
@@ -106,8 +106,8 @@ RepugnantTorchTensors(
            storage_len: 430348288,
            storage_offset: 327378944,
            absolute_offset: 327445248,
-           shape: [1024, 50277],
-           stride: [1, 1024],
+           shape: [50277, 1024],
+           stride: [1024, 1],
            requires_grad: false,
        },
        RepugnantTorchTensor {
@@ -132,6 +132,10 @@ bytes would be `(1024 * 50277) * 2` and the data would
 start at offset `327445248` in the Torch file, or
 if you access the specific file `archive/data/0` in the
 Torch ZIP, it would start at `327378944`.
+
+It worked on the `.pth` and `.pt` LLM models I have.
+
+Source: Trust me bro.
 
 ## Usage
 
