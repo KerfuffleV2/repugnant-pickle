@@ -1,0 +1,16 @@
+[package]
+name = "repugnant-pickle"
+version = "0.0.1"
+edition = "2021"
+resolve = "2"
+
+[features]
+default = []
+torch = ["zip"]
+
+[dependencies]
+anyhow = "1"
+nom = "7.1"
+once_cell ="1"
+num-bigint = "0.4"
+zip = { version = "0.6", optional = true }
