@@ -174,8 +174,10 @@ impl RepugnantTorchTensors {
         // ensure!(!remain.is_empty(), "Unexpected remaining data in pickle");
 
         let (vals, _memo) = evaluate(&ops, true)?;
-        let val = match vals.as_slice() {
-            [Value::Build(a, _), ..] => a.as_ref(),
+        let vals = vals.as_slice();
+        let val = match &vals {
+            &[Value::Build(a, _), ..] => a.as_ref(),
+            &[Value::Seq(..)] => &vals[0],
             _ => bail!("Unexpected toplevel type"),
         };
         // Presumably this is usually going to be an OrderedDict, but maybe

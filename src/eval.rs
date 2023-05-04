@@ -273,7 +273,7 @@ pub fn evaluate<'a>(
                 let rtop = memo.resolve_mut(top, true)?;
                 match rtop {
                     Value::Global(_, args) | Value::Seq(_, args) => {
-                        args.push(Value::Seq(SequenceType::Tuple, kvitems));
+                        args.extend(kvitems);
                     }
                     _wut => bail!("Bad stack top for SETITEMS"),
                 }
