@@ -3,6 +3,10 @@ name = "repugnant-pickle"
 version = "0.0.1"
 edition = "2021"
 resolver = "2"
+license = "Apache"
+description = "Low effort scraping for Python pickle format files, including some support for loading PyTorch checkpoints"
+keywords = [ "python", "pickle", "serialization", "pytorch", "machine-learning" ]
+repository = "https://github.com/KerfuffleV2"
 
 [features]
 default = []
